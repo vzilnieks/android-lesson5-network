@@ -16,6 +16,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.OkHttpClient;
 
@@ -65,12 +66,11 @@ public class MainActivity extends AppCompatActivity implements DownloadCompleteL
     if (mProgressDialog != null) {
       mProgressDialog.hide();
       String mArray[] = null;
-      mArray = repository.toArray(new String[repository.size()]);
-      int a = 1;
+      // Transfer Repository object to String array by a small hack
+      mArray = Arrays.toString(repository.toArray()).split(",");
       ArrayAdapter<String> githubAdapter =
-              new ArrayAdapter<String>(this, R.layout.activity_main, mArray);
+              new ArrayAdapter<String>(this, R.layout.repo_item, R.id.textview, mArray);
       ListView repoList = (ListView) findViewById(R.id.listView);
-//      setContentView(repoList);
       repoList.setAdapter(githubAdapter);
     }
   }
