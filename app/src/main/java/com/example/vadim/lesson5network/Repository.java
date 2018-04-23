@@ -39,6 +39,12 @@ public class Repository implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeStringArray(new String[]{this.name, this.owner.getLogin()});
     }
+
+    @Override
+    public String toString() {
+        return "Name: '" + this.name;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
       public Repository createFromParcel(Parcel in) {
         return new Repository(in);
